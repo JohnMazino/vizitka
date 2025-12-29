@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Софья Бедрик | Визуализатор</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Подключение шрифтов */
+        @font-face {
+            font-family: 'Stem';
+            src: url('fonts/Stem/Stem-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Stem';
+            src: url('fonts/Stem/Stem-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Stem';
+            src: url('fonts/Stem/Stem-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Stem';
+            src: url('fonts/Stem/Stem-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'GardensC';
+            src: url('fonts/GardensC/GardensC_03_1.otf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'SnellRoundhand';
+            src: url('fonts/SnellRoundhand.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <nav>
+            <a href="#" class="logo">S.B.</a>
+            <div class="nav-links">
+                <a href="index.html" data-page="home" class="nav-link active">Главная</a>
+                <a href="portfolio.html" data-page="portfolio" class="nav-link">Портфолио</a>
+                <a href="#" data-page="services" class="nav-link">Услуги</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <!-- Главная страница -->
+        <section id="home" class="page active">
+            <div class="hero">
+                <img src="image/01_MINSK/IMG_1962.JPG" alt="Дизайн интерьера" class="hero-image">
+            </div>
+
+            <div class="content-overlay">
+                <div class="about">
+                    <div class="about-content">
+                        <!-- Левая часть с именем и заголовком -->
+                        <div class="about-left">
+                            <div class="name-small">Бедрик Софья</div>
+                            <div class="name-title">Обо мне</div>
+                        </div>
+
+                        <!-- Правая часть с описанием -->
+                        <div class="about-right">
+                            <div class="about-description">
+                                <p>Привет, я Софья и я очень люблю то, чем занимаюсь. Окончив художественное училище я открыла для себя свое призвание-<strong>ВИЗУАЛИЗАТОР</strong>. Объединив знания архитектуры, композиции и живописи, я нашла свой метод создания художественной визуализации.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Карусель под текстом "обо мне" -->
+                    <div class="carousel-container">
+                        <div class="carousel">
+                            <div class="carousel-track">
+                                <!-- Замените пути на ваши изображения -->
+                                <div class="carousel-slide">
+                                    <img src="image/01_MINSK/IMG_1956.JPG" alt="Проект 1" class="carousel-img">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="image/02_Headwood/IMG_1991.JPG" alt="Проект 2" class="carousel-img">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="image/02_Headwood/IMG_1981.JPG" alt="Проект 3" class="carousel-img">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="image/01_MINSK/IMG_1955.JPG" alt="Проект 4" class="carousel-img">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="image/04_APARTMOSKOW/IMG_9509.JPG" alt="Проект 5" class="carousel-img">
+                                </div>
+                                <!-- Дубликаты для бесконечной прокрутки -->
+                                <div class="carousel-slide">
+                                    <img src="image/01_MINSK/IMG_1956.JPG" alt="Проект 1" class="carousel-img">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="image/02_Headwood/IMG_1991.JPG" alt="Проект 2" class="carousel-img">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="image/02_Headwood/IMG_1981.JPG" alt="Проект 3" class="carousel-img">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="image/01_MINSK/IMG_1955.JPG" alt="Проект 4" class="carousel-img">
+                                </div>
+                                <div class="carousel-slide">
+                                    <img src="image/04_APARTMOSKOW/IMG_9509.JPG" alt="Проект 5" class="carousel-img">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-overlay"></div>
+                    </div>
+                </div>
+
+                <div class="home-contacts">
+                    <h2>Мои контакты</h2>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h3>Телефон</h3>
+                                <p>89002651095</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h3>Почта</h3>
+                                <p>sofya.bedrik@example.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div>
+                                <h3>Telegram</h3>
+                                <p>@sofya_bedrik</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-cube"></i>
+                            </div>
+                            <div>
+                                <h3>3ddd</h3>
+                                <p>sofya_bedrik_3d</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Другие страницы (можно добавить позже) -->
+        <section id="services" class="page">
+            <div class="content-overlay">
+                <div class="section">
+                    <h2>Услуги</h2>
+                    <p>Информация об услугах...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contacts" class="page">
+            <div class="content-overlay">
+                <div class="section">
+                    <h2>Контакты</h2>
+                    <p>Контактная информация...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Визуализатор Бедрик Софья</div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+    <script>
+        // Дополнительный JavaScript для карусели
+        document.addEventListener('DOMContentLoaded', function() {
+            // Инициализация карусели
+            if (document.querySelector('.carousel')) {
+                initCarousel();
+            }
+
+            // Анимация при скролле для хедера
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.padding = '1rem 0';
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.padding = '1.5rem 0';
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            // Анимация навигации
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

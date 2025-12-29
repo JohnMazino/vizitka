@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APART MOSKOW | Софья Бедрик</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        /* Подключение шрифтов */
+        @font-face {
+            font-family: 'Stem';
+            src: url('../fonts/Stem/Stem-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Stem';
+            src: url('../fonts/Stem/Stem-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Stem';
+            src: url('../fonts/Stem/Stem-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Stem';
+            src: url('../fonts/Stem/Stem-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'GardensC';
+            src: url('../fonts/GardensC/GardensC_03_1.otf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'SnellRoundhand';
+            src: url('../fonts/SnellRoundhand.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+</head>
+<body class="collection-page">
+    <!-- Навигация -->
+    <header>
+        <nav>
+            <a href="../index.html" class="logo">S.B.</a>
+            <div class="nav-links">
+                <a href="../index.html" data-page="home" class="nav-link">Главная</a>
+                <a href="../portfolio.html" data-page="portfolio" class="nav-link active">Портфолио</a>
+                <a href="#" data-page="services" class="nav-link">Услуги</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main>
+        <!-- Заголовок коллекции -->
+        <div class="collection-header">
+            <h1>APART MOSKOW</h1>
+        </div>
+        <section class="collection-gallery">
+            <div class="gallery-row-2">
+                <div class="photo-container">
+                    <img src="../image/04_APARTMOSKOW/IMG_9473.JPG" class="gallery-photo">
+                </div>
+                <div class="photo-container">
+                    <img src="../image/04_APARTMOSKOW/IMG_9474.JPG" class="gallery-photo">
+                </div>
+                <div class="photo-container">
+                    <img src="../image/04_APARTMOSKOW/IMG_9509.JPG" class="gallery-photo">
+                </div>
+            </div>
+
+            <div class="gallery-row-3">
+                <div class="photo-container">
+                    <img src="../image/04_APARTMOSKOW/IMG_9501.JPG" class="gallery-photo">
+                </div>
+            </div>
+
+            <div class="gallery-row-4">
+                <div class="photo-container">
+                    <img src="../image/04_APARTMOSKOW/IMG_9480.JPG" class="gallery-photo">
+                </div>
+                <div class="photo-container">
+                    <img src="../image/04_APARTMOSKOW/IMG_9481.JPG" class="gallery-photo">
+                </div>
+            </div>
+
+            <div class="gallery-row-1">
+                <div class="photo-container">
+                    <img src="../image/04_APARTMOSKOW/IMG_9476.JPG" class="gallery-photo">
+                </div>
+                <div class="photo-container">
+                    <img src="../image/04_APARTMOSKOW/IMG_9477.JPG" class="gallery-photo">
+                </div>
+            </div>
+        </section>
+
+        <!-- Панель поделиться -->
+        <section class="share-section">
+            <h3 class="share-title">Поделиться этой коллекцией</h3>
+            <div class="share-buttons">
+                <a href="https://wa.me/?text=Посмотрите%20эту%20коллекцию:%20Загородный%20дом%20Минск%20-%20"
+                   target="_blank"
+                   class="share-button whatsapp">
+                    <i class="fab fa-whatsapp share-icon"></i>
+                    <span>WhatsApp</span>
+                </a>
+
+                <a href="https://t.me/share/url?url=&text=Посмотрите%20эту%20коллекцию:%20Загородный%20дом%20Минск"
+                   target="_blank"
+                   class="share-button telegram">
+                    <i class="fab fa-telegram share-icon"></i>
+                    <span>Telegram</span>
+                </a>
+
+                <button class="share-button copy" onclick="copyLink()">
+                    <i class="fas fa-copy share-icon"></i>
+                    <span>Копировать ссылку</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Уведомление о копировании -->
+        <div class="copy-notification" id="copyNotification">
+            Ссылка скопирована в буфер обмена!
+        </div>
+
+        <!-- Блок Портфолио (повторение страницы portfolio.html) -->
+        <section class="portfolio-collections">
+            <div class="collections-grid">
+                <a href="mirror.html" class="collection-item fade-in-up">
+                    <div class="collection-image-container">
+                        <img src="../image/01_MINSK/IMG_1956.JPG" alt="Bathroom «Le Miroir Infini»" class="collection-image">
+                    </div>
+                    <div class="collection-title-container">
+                        <h3 class="collection-title">Загородный дом.Минск. <br>На основе проекта "ZROBIM architects"<br></h3>
+                    </div>
+                </a>
+                <a href="husband-wife.html" class="collection-item fade-in-up">
+                    <div class="collection-image-container">
+                        <img src="../image/02_Headwood/IMG_1981.JPG" alt="Bathroom Headwood" class="collection-image">
+                    </div>
+                    <div class="collection-title-container">
+                        <h3 class="collection-title">Bathroom "Headwood"</h3>
+                    </div>
+                </a>
+
+                <a href="new-year.html" class="collection-item fade-in-up">
+                    <div class="collection-image-container">
+                        <img src="../image/03_BEDROOMMOSKOW/IMG_9491.JPG" alt="BEDROOM MOSKOW" class="collection-image">
+                    </div>
+                    <div class="collection-title-container">
+                        <h3 class="collection-title">BEDROOM MOSKOW</h3>
+                    </div>
+                </a>
+
+                <a href="headwood.html" class="collection-item fade-in-up">
+                    <div class="collection-image-container">
+                        <img src="../image/05_Belgravia/preview.JPG" alt="Headwood Collection" class="collection-image">
+                    </div>
+                    <div class="collection-title-container">
+                        <h3 class="collection-title">Belgravia Residences(сделано по референсу)</h3>
+                    </div>
+                </a>
+
+                <a href="apartmoscow.html" class="collection-item fade-in-up">
+                    <div class="collection-image-container">
+                        <img src="../image/06_Halloweenstill-life/IMG_1996.JPG" alt="Belgravia Residences" class="collection-image">
+                    </div>
+                    <div class="collection-title-container">
+                        <h3 class="collection-title">Halloweenstill-life</h3>
+                    </div>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Визуализатор Бедрик Софья</div>
+        </div>
+    </footer>
+
+    <script src="../index.js"></script>
+    <script>
+        // JavaScript для страницы коллекции
+        document.addEventListener('DOMContentLoaded', function() {
+            // Анимация элементов при скролле
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, entry.target.dataset.delay || 0);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            fadeElements.forEach((element, index) => {
+                element.dataset.delay = index * 100;
+                observer.observe(element);
+            });
+
+            // Анимация при скролле для хедера
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.padding = '1rem 0';
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.padding = '1.5rem 0';
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            // Анимация навигации
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+
+            // Анимация черты при наведении на коллекцию
+            document.querySelectorAll('.collection-item').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const title = this.querySelector('.collection-title');
+                    if (title) {
+                        title.style.transform = 'translateY(-2px)';
+                    }
+                });
+
+                item.addEventListener('mouseleave', function() {
+                    const title = this.querySelector('.collection-title');
+                    if (title) {
+                        title.style.transform = 'translateY(0)';
+                    }
+                });
+            });
+        });
+
+        // Функция копирования ссылки
+        function copyLink() {
+            const currentUrl = window.location.href;
+            navigator.clipboard.writeText(currentUrl)
+                .then(() => {
+                    // Показать уведомление
+                    const notification = document.getElementById('copyNotification');
+                    notification.classList.add('show');
+
+                    // Скрыть уведомление через 3 секунды
+                    setTimeout(() => {
+                        notification.classList.remove('show');
+                    }, 3000);
+                })
+                .catch(err => {
+                    console.error('Ошибка копирования ссылки: ', err);
+                    alert('Не удалось скопировать ссылку. Пожалуйста, скопируйте вручную: ' + currentUrl);
+                });
+        }
+
+        // Обновление ссылок для шаринга
+        function updateShareLinks() {
+            const currentUrl = encodeURIComponent(window.location.href);
+            const title = encodeURIComponent(document.title);
+
+            // Обновляем ссылки WhatsApp и Telegram
+            const whatsappBtn = document.querySelector('.share-button.whatsapp');
+            const telegramBtn = document.querySelector('.share-button.telegram');
+
+            if (whatsappBtn) {
+                whatsappBtn.href = `https://wa.me/?text=${title}%20${currentUrl}`;
+            }
+
+            if (telegramBtn) {
+                telegramBtn.href = `https://t.me/share/url?url=${currentUrl}&text=${title}`;
+            }
+        }
+
+        // Обновляем ссылки при загрузке
+        document.addEventListener('DOMContentLoaded', updateShareLinks);
+        // Добавьте в конец вашего script тега
+        document.addEventListener('DOMContentLoaded', function() {
+            const gallery = document.querySelector('.collection-gallery');
+            const shareSection = document.querySelector('.share-section');
+
+            if (gallery && shareSection) {
+                // Удаляем лишнее пространство после масштабирования
+                const galleryHeight = gallery.getBoundingClientRect().height;
+                const scaledHeight = galleryHeight * 0.8; // Ваш scale(0.8)
+
+                // Поднимаем блок поделиться ближе
+                shareSection.style.marginTop = '1rem';
+
+                // Уменьшаем отступы
+                gallery.style.marginBottom = '2rem';
+            }
+        });
+    </script>
+</body>
+</html>

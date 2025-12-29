@@ -1,0 +1,1 @@
+Copyright Aleksander Shevchuk 2010 (www.aleksandershevchuk.ru)
