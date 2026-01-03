@@ -38,12 +38,9 @@ header {
     background-color: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    padding: 1rem 0; /* Уменьшил padding для лучшего выравнивания */
+    padding: 1.5rem 0;
     transition: var(--transition);
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    height: 70px; /* Фиксированная высота для выравнивания */
-    display: flex;
-    align-items: center;
 }
 
 nav {
@@ -54,25 +51,20 @@ nav {
     align-items: center;
     padding: 0 2rem;
     position: relative;
-    width: 100%;
-    height: 100%; /* Занимает всю высоту header */
 }
-
 /* Общие стили для логотипа */
 .logo {
     position: absolute;
     left: 2rem;
     display: flex;
     align-items: center;
-    height: 40px;
-    top: 50%;
-    transform: translateY(-50%); /* Центрируем по вертикали */
+    height: 40px; /* Фиксированная высота */
 }
 
 .logo-img {
-    height: 100%;
-    width: auto;
-    max-height: 40px;
+    height: 100%; /* Занимает всю высоту контейнера */
+    width: auto; /* Сохраняем пропорции */
+    max-height: 40px; /* Ограничиваем максимальную высоту */
     object-fit: contain;
     transition: transform 0.3s ease;
 }
@@ -80,6 +72,49 @@ nav {
 /* Эффект при наведении */
 .logo:hover .logo-img {
     transform: scale(1.05);
+}
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Исправляем позиционирование логотипа на мобильных */
+    .logo {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 35px; /* Меньше на мобильных */
+        z-index: 1001;
+    }
+
+    .logo-img {
+        max-height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        height: 30px;
+        left: 0.8rem;
+    }
+
+    .logo-img {
+        max-height: 30px;
+    }
+
+    .hamburger {
+        right: 0.8rem;
+    }
 }
 
 .nav-links {
@@ -129,11 +164,13 @@ nav {
     display: none;
     cursor: pointer;
     font-size: 1.5rem;
+    position: absolute;
+    right: 2rem;
 }
 
 /* Основной контент */
 main {
-    margin-top: 70px; /* Соответствует высоте header */
+    margin-top: 80px;
     position: relative;
     z-index: 2;
 }
@@ -146,7 +183,7 @@ main {
     display: block;
 }
 
-/* Герой секция - исправлено для мобильных */
+/* Герой секция */
 .hero {
     position: fixed;
     top: 0;
@@ -161,7 +198,6 @@ main {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center; /* Центрируем изображение */
     filter: brightness(0.7);
 }
 
@@ -592,6 +628,7 @@ main {
     line-height: 1.6;
 }
 
+
 /* Ряд из 3 фотографий */
 .gallery-row {
     display: grid;
@@ -811,97 +848,8 @@ footer {
     }
 }
 
-.collection-gallery {
-    max-width: 1000px;
-    margin: 0 auto 1.5rem auto;
-    padding: 0 2rem;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.gallery-row-1 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.gallery-row-2 {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-}
-
-.gallery-row-3 {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
-
-.gallery-row-4 {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-}
-
-.gallery-row-5 {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-}
-
-.photo-container {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.gallery-photo {
-    width: 100%;
-    height: auto;
-    display: block;
-    transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
-}
-
-.photo-container:hover .gallery-photo {
-    transform: scale(1.03);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-}
-
-.gallery-photo.contain {
-    object-fit: contain;
-    width: 100%;
-    height: auto;
-    max-height: 800px;
-}
-
-.gallery-photo.cover {
-    object-fit: cover;
-    width: 100%;
-    height: 600px;
-}
-
-.photo-container[data-type="vertical"] .gallery-photo {
-    object-fit: contain;
-    width: 100%;
-    height: auto;
-    max-height: 800px;
-}
-
-.photo-container[data-type="horizontal"] .gallery-photo {
-    object-fit: contain;
-    width: 100%;
-    height: auto;
-    max-height: 500px;
-}
-
+/* Адаптивность */
 @media (max-width: 1200px) {
-    .collection-gallery {
-        max-width: 1000px;
-    }
-
     .gallery-row {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
@@ -921,80 +869,24 @@ footer {
     .carousel-slide {
         flex: 0 0 350px;
     }
-
-    .gallery-row-2 {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .gallery-row-1,
-    .gallery-row-4 {
-        grid-template-columns: 1fr;
-    }
 }
 
 @media (max-width: 768px) {
-    header {
-        height: 60px;
-        padding: 0.5rem 0;
-    }
-
-    nav {
-        padding: 0 1rem;
-        justify-content: space-between;
-    }
-
-    .logo {
-        position: static;
-        height: 35px;
-        margin: 0;
-        order: 1;
-        transform: none;
-        top: auto;
-        left: auto;
-    }
-
-    .logo-img {
-        max-height: 35px;
-    }
-
     .nav-links {
         display: none;
     }
 
     .hamburger {
         display: block;
+    }
+
+    .logo {
         position: static;
-        order: 2;
-        font-size: 1.4rem;
-    }
-
-    /* Исправляем основной контент */
-    main {
-        margin-top: 60px;
-    }
-
-    /* Исправляем герой секцию для мобильных */
-    .hero {
-        position: relative;
-        height: 60vh;
-        margin-top: 60px;
-    }
-
-    .hero-image {
-        object-fit: contain;
-        object-position: center;
-        width: 100%;
-        height: 100%;
-    }
-
-    .content-overlay {
-        margin-top: 0;
     }
 
     .about-content {
         grid-template-columns: 1fr;
         gap: 2rem;
-        padding: 0 1.5rem;
     }
 
     .name-title {
@@ -1039,21 +931,13 @@ footer {
         font-size: 2.2rem;
     }
 
-    .collection-gallery {
-        padding: 0 1rem;
-        gap: 15px;
-    }
-
-    .gallery-row-1,
-    .gallery-row-2,
-    .gallery-row-3,
-    .gallery-row-4,
-    .gallery-row-5 {
-        gap: 15px;
-    }
-
-    .gallery-row-2 {
+    .gallery-row {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .collection-gallery {
+        padding: 0 1.5rem;
     }
 
     .share-section {
@@ -1096,35 +980,6 @@ footer {
 }
 
 @media (max-width: 480px) {
-    header {
-        height: 55px;
-        padding: 0.4rem 0;
-    }
-
-    nav {
-        padding: 0 0.8rem;
-    }
-
-    .logo {
-        height: 30px;
-    }
-
-    .logo-img {
-        max-height: 30px;
-    }
-
-    .hamburger {
-        font-size: 1.3rem;
-    }
-
-    main {
-        margin-top: 55px;
-    }
-
-    .hero {
-        height: 50vh;
-    }
-
     .carousel {
         height: 300px;
     }
@@ -1170,15 +1025,7 @@ footer {
         font-size: 1.8rem;
     }
 
-    .collection-gallery {
-        gap: 10px;
-    }
-
-    .gallery-row-1,
-    .gallery-row-2,
-    .gallery-row-3,
-    .gallery-row-4,
-    .gallery-row-5 {
+    .gallery-row {
         gap: 10px;
     }
 
@@ -1193,22 +1040,150 @@ footer {
     .portfolio-section h2 {
         font-size: 1.5rem;
     }
+}
+/* Галерея коллекции - вертикальное расположение */
+.collection-gallery {
+    max-width: 1000px;
+    margin: 0 auto 1.5rem auto;
+    padding: 0 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
 
-    .photo-container {
-        border-radius: 6px;
+/* Ряды с разным количеством фото */
+.gallery-row-1 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.gallery-row-2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.gallery-row-3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.gallery-row-4 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.gallery-row-5 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+/* Контейнер для фото с сохранением пропорций */
+.photo-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Стиль для фото с сохранением оригинальных пропорций */
+.gallery-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.photo-container:hover .gallery-photo {
+    transform: scale(1.03);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Стили для фото с обрезкой, если нужно */
+.gallery-photo.contain {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-height: 800px;
+}
+
+.gallery-photo.cover {
+    object-fit: cover;
+    width: 100%;
+    height: 600px;
+}
+
+/* Автоматическое определение типа фото */
+.photo-container[data-type="vertical"] .gallery-photo {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-height: 800px;
+}
+
+.photo-container[data-type="horizontal"] .gallery-photo {
+    object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+}
+
+/* Адаптивность для галереи */
+@media (max-width: 1200px) {
+    .collection-gallery {
+        max-width: 1000px;
     }
 }
 
-@media (max-width: 360px) {
-    .logo {
-        height: 28px;
+@media (max-width: 992px) {
+    .gallery-row-2 {
+        grid-template-columns: repeat(2, 1fr);
     }
 
-    .logo-img {
-        max-height: 28px;
+    .gallery-row-1,
+    .gallery-row-4 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .collection-gallery {
+        padding: 0 1rem;
+        gap: 15px;
     }
 
-    .hero {
-        height: 45vh;
+    .gallery-row-1,
+    .gallery-row-2,
+    .gallery-row-3,
+    .gallery-row-4,
+    .gallery-row-5 {
+        gap: 15px;
+    }
+
+    .gallery-row-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .collection-gallery {
+        gap: 10px;
+    }
+
+    .gallery-row-1,
+    .gallery-row-2,
+    .gallery-row-3,
+    .gallery-row-4,
+    .gallery-row-5 {
+        gap: 10px;
+    }
+
+    .photo-container {
+        border-radius: 6px;
     }
 }
