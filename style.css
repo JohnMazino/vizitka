@@ -52,17 +52,19 @@ nav {
     padding: 0 2rem;
     position: relative;
 }
+/* Общие стили для логотипа */
 .logo {
     position: absolute;
     left: 2rem;
     display: flex;
     align-items: center;
-    height: 40px; /* Высота логотипа */
+    height: 40px; /* Фиксированная высота */
 }
 
 .logo-img {
-    height: 100%; /* Логотип займет всю высоту контейнера */
+    height: 100%; /* Занимает всю высоту контейнера */
     width: auto; /* Сохраняем пропорции */
+    max-height: 40px; /* Ограничиваем максимальную высоту */
     object-fit: contain;
     transition: transform 0.3s ease;
 }
@@ -71,13 +73,28 @@ nav {
 .logo:hover .logo-img {
     transform: scale(1.05);
 }
-
-/* Адаптивность для логотипа */
+/* Для мобильных устройств */
 @media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        position: absolute;
+        right: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    /* Исправляем позиционирование логотипа на мобильных */
     .logo {
-        position: static;
-        height: 35px;
-        margin-right: auto;
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 35px; /* Меньше на мобильных */
+        z-index: 1001;
     }
 
     .logo-img {
@@ -88,10 +105,15 @@ nav {
 @media (max-width: 480px) {
     .logo {
         height: 30px;
+        left: 0.8rem;
     }
 
     .logo-img {
         max-height: 30px;
+    }
+
+    .hamburger {
+        right: 0.8rem;
     }
 }
 
