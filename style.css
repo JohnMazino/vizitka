@@ -72,11 +72,10 @@ nav {
 .nav-links a {
     color: var(--text-color);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 300;
     position: relative;
     transition: var(--transition);
     font-family: var(--font-stem);
-    font-weight: 400;
     padding: 0.5rem 0;
 }
 
@@ -168,7 +167,6 @@ main {
     align-items: start;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 2rem;
 }
 
 /* Левая часть */
@@ -177,6 +175,7 @@ main {
 }
 
 .name-small {
+    padding: 0 1rem;
     font-size: 1.2rem;
     color: var(--text-color);
     margin-bottom: 1.5rem;
