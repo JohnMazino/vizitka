@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bathroom "Headwood" | Софья Бедрик</title>
+        <link rel="icon" type="image/png" href="image/IMG_1958.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../style.css">
     <style>
@@ -49,13 +50,302 @@
             font-weight: normal;
             font-style: normal;
         }
+
+        /* Стили для полноэкранного просмотра */
+        .fullscreen-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.98);
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .fullscreen-overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Затемнение навигации в полноэкранном режиме */
+        .fullscreen-overlay.active ~ header {
+            opacity: 0.3 !important;
+            pointer-events: none !important;
+            transition: opacity 0.3s ease !important;
+            z-index: 1999;
+        }
+
+        .fullscreen-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            box-sizing: border-box;
+        }
+
+        .fullscreen-image-container {
+            position: relative;
+            max-width: 100%;
+            max-height: 100%;
+            overflow: visible;
+            transform-origin: center center;
+            transition: transform 0.2s ease;
+            cursor: default;
+        }
+
+        .fullscreen-image {
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 5px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease;
+            cursor: default;
+            display: block;
+        }
+
+        /* Состояния увеличения */
+        .fullscreen-image-container.zoomed {
+            cursor: grab;
+        }
+
+        .fullscreen-image-container.zoomed:active {
+            cursor: grabbing;
+        }
+
+        .fullscreen-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2001;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fullscreen-close:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+        }
+
+        .fullscreen-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            color: white;
+            font-size: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 2001;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .fullscreen-nav:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .fullscreen-nav.prev {
+            left: 20px;
+        }
+
+        .fullscreen-nav.next {
+            right: 20px;
+        }
+
+        .fullscreen-counter {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-family: var(--font-stem);
+            font-weight: 300;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 12px 24px;
+            border-radius: 25px;
+            z-index: 2001;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Панель управления зумом */
+        .zoom-controls {
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 2001;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .zoom-btn {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .zoom-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+        }
+
+        .zoom-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .zoom-btn:disabled:hover {
+            transform: none;
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Индикатор масштаба */
+        .zoom-indicator {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            color: white;
+            font-family: var(--font-stem);
+            font-weight: 300;
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 8px 16px;
+            border-radius: 20px;
+            z-index: 2001;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 1;
+        }
+
+        /* Анимация клика по фото */
+        .photo-container {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-container:hover {
+            transform: scale(1.02);
+        }
+
+        /* Для управления жестами на телефоне */
+        .fullscreen-image-container.pinch-zoom {
+            touch-action: none;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .fullscreen-nav {
+                display: none;
+            }
+
+            .fullscreen-container {
+                padding: 10px;
+            }
+
+            .fullscreen-image {
+                max-width: 95%;
+                max-height: 85vh;
+            }
+
+            .fullscreen-close {
+                top: 15px;
+                right: 15px;
+                width: 45px;
+                height: 45px;
+                font-size: 20px;
+            }
+
+            .zoom-controls {
+                bottom: 90px;
+            }
+
+            .zoom-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+
+            .fullscreen-counter {
+                bottom: 65px;
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+
+            .zoom-indicator {
+                top: 70px;
+                left: 15px;
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            .fullscreen-overlay.active ~ header {
+                opacity: 0.1 !important;
+            }
+        }
+
+        /* Скрытие элементов управления при бездействии */
+        .fullscreen-controls {
+            transition: opacity 0.5s ease;
+        }
+
+        .fullscreen-overlay.inactive-controls .fullscreen-controls {
+            opacity: 0;
+        }
+
+        .fullscreen-overlay.inactive-controls:hover .fullscreen-controls {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="collection-page">
     <!-- Навигация -->
     <header>
         <nav>
-            <a href="../index.html" class="logo">S.B.</a>
+            <a href="#" class="logo">
+                <img src="../image/bd..png"  class="logo-img">
+            </a>
             <div class="nav-links">
                 <a href="../index.html" data-page="home" class="nav-link">Главная</a>
                 <a href="../portfolio.html" data-page="portfolio" class="nav-link active">Портфолио</a>
@@ -73,30 +363,64 @@
         <div class="collection-header">
             <h1>Bathroom "Headwood"</h1>
         </div>
-        <section class="collection-gallery">
+                <section class="collection-gallery">
             <div class="gallery-row-2">
-                <div class="photo-container">
-                    <img src="../image/02_Headwood/IMG_1981.JPG" class="gallery-photo">
+                <div class="photo-container" onclick="openFullscreen(this)">
+                    <img src="../image/02_Headwood/IMG_1981.jpg" class="gallery-photo">
                 </div>
-                <div class="photo-container">
-                    <img src="../image/02_Headwood/IMG_1990.JPG" class="gallery-photo">
+                <div class="photo-container" onclick="openFullscreen(this)">
+                    <img src="../image/02_Headwood/IMG_1990.jpg" class="gallery-photo">
                 </div>
-                <div class="photo-container">
-                    <img src="../image/02_Headwood/IMG_1991.JPG" class="gallery-photo">
+                <div class="photo-container" onclick="openFullscreen(this)">
+                    <img src="../image/02_Headwood/IMG_1991.jpg" class="gallery-photo">
                 </div>
             </div>
             <div class="gallery-row-2">
-                <div class="photo-container">
-                    <img src="../image/02_Headwood/IMG_1992.JPG" class="gallery-photo">
+                <div class="photo-container" onclick="openFullscreen(this)">
+                    <img src="../image/02_Headwood/IMG_1992.jpg" class="gallery-photo">
                 </div>
-                <div class="photo-container">
-                    <img src="../image/02_Headwood/IMG_1993.JPG" class="gallery-photo">
+                <div class="photo-container" onclick="openFullscreen(this)">
+                    <img src="../image/02_Headwood/IMG_1993.jpg" class="gallery-photo">
                 </div>
-                <div class="photo-container">
-                    <img src="../image/02_Headwood/IMG_1995.JPG" class="gallery-photo">
+                <div class="photo-container" onclick="openFullscreen(this)">
+                    <img src="../image/02_Headwood/IMG_1995.jpg" class="gallery-photo">
                 </div>
             </div>
         </section>
+
+        <!-- Полноэкранный просмотр -->
+        <div class="fullscreen-overlay" id="fullscreenOverlay" onclick="handleOverlayClick(event)">
+            <button class="fullscreen-close fullscreen-controls" onclick="closeFullscreen(event)">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="fullscreen-nav prev fullscreen-controls" onclick="changeImage(-1, event)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="fullscreen-nav next fullscreen-controls" onclick="changeImage(1, event)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="fullscreen-container">
+                <div class="fullscreen-image-container" id="fullscreenImageContainer">
+                    <img id="fullscreenImage" src="" alt="" class="fullscreen-image">
+                </div>
+            </div>
+
+            <div class="zoom-controls fullscreen-controls">
+                <button class="zoom-btn" onclick="zoomOut(event)" id="zoomOutBtn" disabled>
+                    <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="zoom-btn" onclick="resetZoom(event)" id="resetZoomBtn">
+                    <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+                <button class="zoom-btn" onclick="zoomIn(event)" id="zoomInBtn">
+                    <i class="fas fa-search-plus"></i>
+                </button>
+            </div>
+
+            <div class="fullscreen-counter fullscreen-controls" id="imageCounter"></div>
+            <div class="zoom-indicator fullscreen-controls" id="zoomIndicator">100%</div>
+        </div>
 
         <!-- Панель поделиться -->
         <section class="share-section">
@@ -133,7 +457,7 @@
             <div class="collections-grid">
                 <a href="mirror.html" class="collection-item fade-in-up">
                     <div class="collection-image-container">
-                        <img src="../image/01_MINSK/IMG_1956.JPG" alt="Bathroom «Le Miroir Infini»" class="collection-image">
+                        <img src="../image/01_MINSK/IMG_1956.jpg" alt="Bathroom «Le Miroir Infini»" class="collection-image">
                     </div>
                     <div class="collection-title-container">
                         <h3 class="collection-title">Загородный дом.Минск. <br>На основе проекта "ZROBIM architects"<br></h3>
@@ -142,7 +466,7 @@
 
                 <a href="new-year.html" class="collection-item fade-in-up">
                     <div class="collection-image-container">
-                        <img src="../image/03_BEDROOMMOSKOW/IMG_9491.JPG" alt="BEDROOM MOSKOW" class="collection-image">
+                        <img src="../image/03_BEDROOMMOSKOW/IMG_9491.jpg" alt="BEDROOM MOSKOW" class="collection-image">
                     </div>
                     <div class="collection-title-container">
                         <h3 class="collection-title">BEDROOM MOSKOW</h3>
@@ -151,7 +475,7 @@
 
                 <a href="minsk.html" class="collection-item fade-in-up">
                     <div class="collection-image-container">
-                        <img src="../image/04_APARTMOSKOW/IMG_9474.JPG" alt="APART MOSKOW" class="collection-image">
+                        <img src="../image/04_APARTMOSKOW/IMG_9474.jpg" alt="APART MOSKOW" class="collection-image">
                     </div>
                     <div class="collection-title-container">
                         <h3 class="collection-title">APART MOSKOW</h3>
@@ -160,7 +484,7 @@
 
                 <a href="headwood.html" class="collection-item fade-in-up">
                     <div class="collection-image-container">
-                        <img src="../image/05_Belgravia/preview.JPG" alt="Headwood Collection" class="collection-image">
+                        <img src="../image/05_Belgravia/preview.jpg" alt="Headwood Collection" class="collection-image">
                     </div>
                     <div class="collection-title-container">
                         <h3 class="collection-title">Belgravia Residences(сделано по референсу)</h3>
@@ -169,7 +493,7 @@
 
                 <a href="apartmoscow.html" class="collection-item fade-in-up">
                     <div class="collection-image-container">
-                        <img src="../image/06_Halloweenstill-life/IMG_1996.JPG" alt="Belgravia Residences" class="collection-image">
+                        <img src="../image/06_Halloweenstill-life/IMG_1996.jpg" alt="Belgravia Residences" class="collection-image">
                     </div>
                     <div class="collection-title-container">
                         <h3 class="collection-title">Halloweenstill-life</h3>
@@ -188,9 +512,68 @@
 
     <script src="../index.js"></script>
     <script>
-        // JavaScript для страницы коллекции
+        // Глобальные переменные для полноэкранного просмотра
+        let currentImageIndex = 0;
+        const images = [];
+        let currentZoom = 1;
+        const zoomSteps = [1, 1.25, 1.5, 1.75, 2, 2.5, 3];
+        let isZoomed = false;
+        let isPanning = false;
+        let panStartX = 0;
+        let panStartY = 0;
+        let currentTranslateX = 0;
+        let currentTranslateY = 0;
+        let controlsTimeout;
+        let initialDistance = null;
+        let initialScale = 1;
+
+        // Собираем все изображения галереи при загрузке страницы
         document.addEventListener('DOMContentLoaded', function() {
-            // Анимация элементов при скролле
+            // Находим все фотографии в галерее
+            const photoContainers = document.querySelectorAll('.photo-container');
+            photoContainers.forEach((container, index) => {
+                const img = container.querySelector('.gallery-photo');
+                if (img) {
+                    images.push({
+                        src: img.src,
+                        alt: img.alt,
+                        index: index
+                    });
+                }
+            });
+
+            // Добавляем возможность закрытия по ESC
+            document.addEventListener('keydown', function(e) {
+                const overlay = document.getElementById('fullscreenOverlay');
+                if (overlay.classList.contains('active')) {
+                    if (e.key === 'Escape') {
+                        closeFullscreen();
+                    }
+                    if (e.key === 'ArrowLeft') {
+                        changeImage(-1);
+                    }
+                    if (e.key === 'ArrowRight') {
+                        changeImage(1);
+                    }
+                    if ((e.key === '+' || e.key === '=') && (e.ctrlKey || e.metaKey)) {
+                        e.preventDefault();
+                        zoomIn();
+                    }
+                    if ((e.key === '-' || e.key === '_') && (e.ctrlKey || e.metaKey)) {
+                        e.preventDefault();
+                        zoomOut();
+                    }
+                    if (e.key === '0' && (e.ctrlKey || e.metaKey)) {
+                        e.preventDefault();
+                        resetZoom();
+                    }
+                }
+            });
+
+            // Инициализация событий для управления
+            initFullscreenEvents();
+
+            // Остальной код инициализации...
             const fadeElements = document.querySelectorAll('.fade-in-up');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -211,7 +594,6 @@
                 observer.observe(element);
             });
 
-            // Анимация при скролле для хедера
             window.addEventListener('scroll', function() {
                 const header = document.querySelector('header');
                 if (window.scrollY > 50) {
@@ -223,7 +605,6 @@
                 }
             });
 
-            // Анимация навигации
             document.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('mouseenter', function() {
                     this.style.transform = 'translateY(-3px)';
@@ -234,7 +615,6 @@
                 });
             });
 
-            // Анимация черты при наведении на коллекцию
             document.querySelectorAll('.collection-item').forEach(item => {
                 item.addEventListener('mouseenter', function() {
                     const title = this.querySelector('.collection-title');
@@ -250,18 +630,398 @@
                     }
                 });
             });
+
+            updateShareLinks();
+
+            const gallery = document.querySelector('.collection-gallery');
+            const shareSection = document.querySelector('.share-section');
+
+            if (gallery && shareSection) {
+                shareSection.style.marginTop = '1rem';
+                gallery.style.marginBottom = '2rem';
+            }
         });
+
+        // Инициализация событий полноэкранного режима
+        function initFullscreenEvents() {
+            const container = document.getElementById('fullscreenImageContainer');
+            const image = document.getElementById('fullscreenImage');
+            const overlay = document.getElementById('fullscreenOverlay');
+
+            if (!container || !image || !overlay) return;
+
+            // PC: Зажатие мыши для панорамирования
+            container.addEventListener('mousedown', startPanMouse);
+            document.addEventListener('mousemove', panMouse);
+            document.addEventListener('mouseup', endPan);
+
+            // Mobile: Touch события для щипка и панорамирования
+            container.addEventListener('touchstart', handleTouchStart, { passive: false });
+            container.addEventListener('touchmove', handleTouchMove, { passive: false });
+            container.addEventListener('touchend', handleTouchEnd);
+
+            // Двойной клик для зума на ПК
+            image.addEventListener('dblclick', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+
+                if (!isZoomed) {
+                    zoomIn();
+                } else {
+                    resetZoom();
+                }
+            });
+
+            // Клик по фото для зума на ПК
+            image.addEventListener('click', function(e) {
+                if (window.innerWidth > 768 && !isZoomed) { // Только на ПК
+                    e.preventDefault();
+                    e.stopPropagation();
+                    zoomIn();
+                }
+            });
+        }
+
+        // Обработчик клика по оверлею (затененному фону)
+        function handleOverlayClick(e) {
+            // Проверяем, кликнули ли мы на самом фото, контейнере или элементах управления
+            const container = document.getElementById('fullscreenImageContainer');
+            const image = document.getElementById('fullscreenImage');
+
+            const clickedOnImage = e.target === image ||
+                                  e.target === container ||
+                                  container.contains(e.target);
+
+            const clickedOnControls = e.target.closest('.fullscreen-controls') ||
+                                     e.target.closest('.fullscreen-nav') ||
+                                     e.target.closest('.fullscreen-close') ||
+                                     e.target.closest('.zoom-controls');
+
+            // Если кликнули на затененном фоне (не на фото и не на элементах управления) - закрываем
+            if (!clickedOnImage && !clickedOnControls) {
+                closeFullscreen();
+            }
+        }
+
+        // PC: Начало панорамирования мышью
+        function startPanMouse(e) {
+            if (isZoomed && e.button === 0) { // Левая кнопка мыши
+                isPanning = true;
+                panStartX = e.clientX - currentTranslateX;
+                panStartY = e.clientY - currentTranslateY;
+
+                const container = document.getElementById('fullscreenImageContainer');
+                container.style.cursor = 'grabbing';
+                container.style.transition = 'none';
+
+                e.preventDefault();
+                e.stopPropagation();
+
+                startControlsTimer();
+            }
+        }
+
+        // PC: Панорамирование мышью
+        function panMouse(e) {
+            if (isPanning) {
+                const container = document.getElementById('fullscreenImageContainer');
+
+                currentTranslateX = e.clientX - panStartX;
+                currentTranslateY = e.clientY - panStartY;
+
+                container.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px) scale(${currentZoom})`;
+
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        }
+
+        // Mobile: Обработка touch событий
+        function handleTouchStart(e) {
+            if (e.touches.length === 1) {
+                // Один палец - начало панорамирования
+                if (isZoomed) {
+                    isPanning = true;
+                    panStartX = e.touches[0].clientX - currentTranslateX;
+                    panStartY = e.touches[0].clientY - currentTranslateY;
+
+                    const container = document.getElementById('fullscreenImageContainer');
+                    container.style.transition = 'none';
+                }
+            } else if (e.touches.length === 2) {
+                // Два пальца - начало жеста щипка
+                isPanning = false;
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+
+                initialDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+                initialScale = currentZoom;
+
+                const container = document.getElementById('fullscreenImageContainer');
+                container.classList.add('pinch-zoom');
+            }
+
+            e.preventDefault();
+        }
+
+        function handleTouchMove(e) {
+            if (e.touches.length === 1 && isPanning) {
+                // Один палец - панорамирование
+                const container = document.getElementById('fullscreenImageContainer');
+
+                currentTranslateX = e.touches[0].clientX - panStartX;
+                currentTranslateY = e.touches[0].clientY - panStartY;
+
+                container.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px) scale(${currentZoom})`;
+            } else if (e.touches.length === 2 && initialDistance !== null) {
+                // Два пальца - жесты щипка
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+
+                const currentDistance = Math.hypot(
+                    touch2.clientX - touch1.clientX,
+                    touch2.clientY - touch1.clientY
+                );
+
+                if (initialDistance > 0) {
+                    const scale = (currentDistance / initialDistance) * initialScale;
+
+                    // Ограничиваем масштаб
+                    const minScale = zoomSteps[0];
+                    const maxScale = zoomSteps[zoomSteps.length - 1];
+                    currentZoom = Math.max(minScale, Math.min(maxScale, scale));
+
+                    applyZoom();
+                }
+            }
+
+            e.preventDefault();
+        }
+
+        function handleTouchEnd(e) {
+            if (e.touches.length === 0) {
+                // Все пальцы убраны
+                isPanning = false;
+                initialDistance = null;
+
+                const container = document.getElementById('fullscreenImageContainer');
+                container.classList.remove('pinch-zoom');
+                container.style.transition = 'transform 0.2s ease';
+            }
+
+            e.preventDefault();
+        }
+
+        // Конец панорамирования
+        function endPan() {
+            if (isPanning) {
+                isPanning = false;
+                const container = document.getElementById('fullscreenImageContainer');
+                container.style.cursor = isZoomed ? 'grab' : 'default';
+                container.style.transition = 'transform 0.2s ease';
+            }
+        }
+
+        // Функция открытия полноэкранного режима
+        function openFullscreen(element) {
+            const clickedImg = element.querySelector('.gallery-photo');
+            const clickedIndex = images.findIndex(img => img.src === clickedImg.src);
+
+            if (clickedIndex !== -1) {
+                currentImageIndex = clickedIndex;
+                resetZoom();
+
+                const overlay = document.getElementById('fullscreenOverlay');
+                overlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                // Скрыть навигацию
+                const header = document.querySelector('header');
+                header.style.opacity = '0';
+                header.style.pointerEvents = 'none';
+                header.style.transition = 'opacity 0.3s ease';
+
+                updateFullscreenImage();
+                startControlsTimer();
+            }
+        }
+
+        // Функция закрытия полноэкранного режима
+        function closeFullscreen(event) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            const overlay = document.getElementById('fullscreenOverlay');
+            overlay.classList.remove('active');
+            document.body.style.overflow = 'auto';
+
+            // Вернуть навигацию
+            const header = document.querySelector('header');
+            header.style.opacity = '1';
+            header.style.pointerEvents = 'auto';
+
+            setTimeout(() => {
+                resetZoom();
+                currentTranslateX = 0;
+                currentTranslateY = 0;
+            }, 300);
+        }
+
+        // Функция смены изображения
+        function changeImage(direction, event) {
+            if (event) {
+                event.stopPropagation();
+            }
+
+            currentImageIndex += direction;
+
+            if (currentImageIndex < 0) {
+                currentImageIndex = images.length - 1;
+            } else if (currentImageIndex >= images.length) {
+                currentImageIndex = 0;
+            }
+
+            resetZoom();
+            updateFullscreenImage();
+            startControlsTimer();
+        }
+
+        // Функция обновления изображения в полноэкранном режиме
+        function updateFullscreenImage() {
+            const fullscreenImage = document.getElementById('fullscreenImage');
+            const imageCounter = document.getElementById('imageCounter');
+            const container = document.getElementById('fullscreenImageContainer');
+
+            if (images[currentImageIndex]) {
+                // Показываем прелоадер
+                fullscreenImage.style.opacity = '0';
+
+                const img = new Image();
+                img.onload = function() {
+                    fullscreenImage.src = this.src;
+                    fullscreenImage.alt = images[currentImageIndex].alt;
+                    imageCounter.textContent = `${currentImageIndex + 1} / ${images.length}`;
+
+                    // Сбрасываем трансформацию
+                    resetZoom();
+
+                    // Плавное появление
+                    setTimeout(() => {
+                        fullscreenImage.style.opacity = '1';
+                    }, 100);
+                };
+                img.src = images[currentImageIndex].src;
+            }
+        }
+
+        // Увеличение изображения
+        function zoomIn(event) {
+            if (event) event.stopPropagation();
+
+            const currentZoomIndex = zoomSteps.indexOf(currentZoom);
+            if (currentZoomIndex < zoomSteps.length - 1) {
+                currentZoom = zoomSteps[currentZoomIndex + 1];
+                applyZoom();
+            }
+
+            startControlsTimer();
+        }
+
+        // Уменьшение изображения
+        function zoomOut(event) {
+            if (event) event.stopPropagation();
+
+            const currentZoomIndex = zoomSteps.indexOf(currentZoom);
+            if (currentZoomIndex > 0) {
+                currentZoom = zoomSteps[currentZoomIndex - 1];
+                applyZoom();
+            }
+
+            startControlsTimer();
+        }
+
+        // Сброс зума
+        function resetZoom(event) {
+            if (event) event.stopPropagation();
+
+            currentZoom = 1;
+            currentTranslateX = 0;
+            currentTranslateY = 0;
+            applyZoom();
+
+            startControlsTimer();
+        }
+
+        // Применение зума
+        function applyZoom() {
+            const container = document.getElementById('fullscreenImageContainer');
+            const zoomIndicator = document.getElementById('zoomIndicator');
+            const zoomOutBtn = document.getElementById('zoomOutBtn');
+            const resetZoomBtn = document.getElementById('resetZoomBtn');
+            const zoomInBtn = document.getElementById('zoomInBtn');
+
+            if (container && zoomIndicator) {
+                container.style.transform = `translate(${currentTranslateX}px, ${currentTranslateY}px) scale(${currentZoom})`;
+                zoomIndicator.textContent = `${Math.round(currentZoom * 100)}%`;
+
+                if (currentZoom > 1) {
+                    container.classList.add('zoomed');
+                    isZoomed = true;
+                    container.style.cursor = 'grab';
+                } else {
+                    container.classList.remove('zoomed');
+                    isZoomed = false;
+                    container.style.cursor = 'default';
+                    currentTranslateX = 0;
+                    currentTranslateY = 0;
+                    container.style.transform = 'translate(0, 0) scale(1)';
+                }
+
+                if (zoomOutBtn) {
+                    zoomOutBtn.disabled = currentZoom === zoomSteps[0];
+                }
+                if (resetZoomBtn) {
+                    resetZoomBtn.disabled = currentZoom === 1;
+                }
+                if (zoomInBtn) {
+                    zoomInBtn.disabled = currentZoom === zoomSteps[zoomSteps.length - 1];
+                }
+            }
+        }
+
+        // Таймер скрытия элементов управления
+        function startControlsTimer() {
+            clearTimeout(controlsTimeout);
+            const overlay = document.getElementById('fullscreenOverlay');
+            overlay.classList.remove('inactive-controls');
+
+            controlsTimeout = setTimeout(() => {
+                if (overlay.classList.contains('active')) {
+                    overlay.classList.add('inactive-controls');
+                }
+            }, 3000);
+        }
+
+        // Сброс таймера при взаимодействии
+        function resetControlsTimer() {
+            startControlsTimer();
+        }
+
+        // Обработчики для сброса таймера
+        document.getElementById('fullscreenOverlay').addEventListener('mousemove', resetControlsTimer);
+        document.getElementById('fullscreenOverlay').addEventListener('touchmove', resetControlsTimer);
 
         // Функция копирования ссылки
         function copyLink() {
             const currentUrl = window.location.href;
             navigator.clipboard.writeText(currentUrl)
                 .then(() => {
-                    // Показать уведомление
                     const notification = document.getElementById('copyNotification');
                     notification.classList.add('show');
-
-                    // Скрыть уведомление через 3 секунды
                     setTimeout(() => {
                         notification.classList.remove('show');
                     }, 3000);
@@ -277,7 +1037,6 @@
             const currentUrl = encodeURIComponent(window.location.href);
             const title = encodeURIComponent(document.title);
 
-            // Обновляем ссылки WhatsApp и Telegram
             const whatsappBtn = document.querySelector('.share-button.whatsapp');
             const telegramBtn = document.querySelector('.share-button.telegram');
 
@@ -289,26 +1048,6 @@
                 telegramBtn.href = `https://t.me/share/url?url=${currentUrl}&text=${title}`;
             }
         }
-
-        // Обновляем ссылки при загрузке
-        document.addEventListener('DOMContentLoaded', updateShareLinks);
-        // Добавьте в конец вашего script тега
-        document.addEventListener('DOMContentLoaded', function() {
-            const gallery = document.querySelector('.collection-gallery');
-            const shareSection = document.querySelector('.share-section');
-
-            if (gallery && shareSection) {
-                // Удаляем лишнее пространство после масштабирования
-                const galleryHeight = gallery.getBoundingClientRect().height;
-                const scaledHeight = galleryHeight * 0.8; // Ваш scale(0.8)
-
-                // Поднимаем блок поделиться ближе
-                shareSection.style.marginTop = '1rem';
-
-                // Уменьшаем отступы
-                gallery.style.marginBottom = '2rem';
-            }
-        });
     </script>
 </body>
 </html>
