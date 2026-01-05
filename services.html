@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Услуги | Софья Бедрик</title>
+
+    <!-- Favicon -->
+    <link rel="icon" href="image/IMG_1958.png" type="image/png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Подключение шрифтов */
+        @font-face {
+            font-family: 'Stem';
+            src: url('fonts/Stem/Stem-Light.ttf') format('truetype');
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Stem';
+            src: url('fonts/Stem/Stem-Regular.ttf') format('truetype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Stem';
+            src: url('fonts/Stem/Stem-Medium.ttf') format('truetype');
+            font-weight: 500;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Stem';
+            src: url('fonts/Stem/Stem-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'GardensC';
+            src: url('fonts/GardensC/GardensC_03_1.otf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'SnellRoundhand';
+            src: url('fonts/SnellRoundhand.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        /* Стили для страницы услуг */
+        .services-page {
+            padding-top: 10px;
+        }
+
+        .services-hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .services-hero h1 {
+            font-family: 'GardensC', cursive;
+            font-size: 3rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .services-hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background-color: var(--accent-color);
+        }
+
+        .services-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Левая часть - информация об услуге */
+        .service-info {
+            padding-right: 2rem;
+        }
+
+        .service-title {
+            font-family: 'GardensC', cursive;
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .service-price {
+            font-family: var(--font-stem);
+            font-weight: 500;
+            font-size: 2rem;
+            color: var(--highlight-color);
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .service-package {
+            margin-bottom: 3rem;
+        }
+
+        .package-title {
+            font-family: var(--font-stem);
+            font-weight: 500;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .package-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            background-color: var(--accent-color);
+            border-radius: 50%;
+        }
+
+        .package-list {
+            list-style: none;
+            padding-left: 1.5rem;
+        }
+
+        .package-list li {
+            font-family: var(--font-stem);
+            font-weight: 300;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .package-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--highlight-color);
+            font-size: 1.5rem;
+            line-height: 1;
+        }
+
+        .service-discount {
+            background-color: rgba(0, 0, 0, 0.03);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--highlight-color);
+            margin-top: 2rem;
+        }
+
+        .discount-text {
+            font-family: var(--font-stem);
+            font-weight: 400;
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin: 0;
+        }
+
+        .discount-highlight {
+            color: var(--highlight-color);
+            font-weight: 500;
+        }
+
+        /* Правая часть - галерея */
+        .service-gallery {
+            position: relative;
+            height: 500px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.8s cubic-bezier(0.33, 1, 0.68, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .gallery-slide.next {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+
+        .gallery-slide.prev {
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+        }
+
+        .gallery-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background-color: white;
+            transform: scale(1.2);
+        }
+
+        .gallery-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            font-family: var(--font-stem);
+            font-weight: 300;
+            font-size: 0.9rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            z-index: 10;
+        }
+
+        /* Блок связи */
+        .contact-action {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 3rem 2rem;
+            background: var(--secondary-color);
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .contact-action-title {
+            font-family: var(--font-stem);
+            font-weight: 500;
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .contact-action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-action-button {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 1rem 2rem;
+            background: white;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50px;
+            font-family: var(--font-stem);
+            font-weight: 400;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .contact-action-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-action-button.telegram {
+            background: #0088cc;
+            color: white;
+            border-color: #0088cc;
+        }
+
+        .contact-action-button.telegram:hover {
+            background: #0077b5;
+            box-shadow: 0 10px 20px rgba(0, 136, 204, 0.3);
+        }
+
+        .contact-action-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 1024px) {
+            .services-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .service-info {
+                padding-right: 0;
+            }
+
+            .service-gallery {
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-hero {
+                padding: 3rem 1.5rem 1rem;
+            }
+
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .services-content {
+                padding: 0 1.5rem 3rem;
+                gap: 2rem;
+            }
+
+            .service-title {
+                font-size: 2rem;
+            }
+
+            .service-price {
+                font-size: 1.7rem;
+            }
+
+            .service-gallery {
+                height: 350px;
+            }
+
+            .contact-action {
+                padding: 2rem 1.5rem;
+                margin: 3rem auto;
+            }
+
+            .contact-action-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-hero h1 {
+                font-size: 2rem;
+            }
+
+            .service-title {
+                font-size: 1.8rem;
+            }
+
+            .service-price {
+                font-size: 1.5rem;
+            }
+
+            .package-list li {
+                font-size: 1rem;
+            }
+
+            .service-gallery {
+                height: 300px;
+            }
+
+            .contact-action {
+                padding: 1.5rem 1rem;
+                margin: 2rem auto;
+            }
+
+            .contact-action-title {
+                font-size: 1.3rem;
+            }
+
+            .contact-action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-action-button {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Навигация -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">
+                <img src="image/bd..png" class="logo-img">
+            </a>
+            <div class="nav-links">
+                <a href="index.html" data-page="home" class="nav-link">Главная</a>
+                <a href="portfolio.html" data-page="portfolio" class="nav-link">Портфолио</a>
+                <a href="#" data-page="services" class="nav-link active">Услуги</a>
+            </div>
+            <div class="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Основной контент -->
+    <main class="services-page">
+        <!-- Заголовок -->
+        <div class="services-hero">
+            <h1>Мои услуги</h1>
+        </div>
+
+        <!-- Контент услуг -->
+        <div class="services-content">
+            <!-- Левая часть - информация -->
+            <div class="service-info">
+                <h2 class="service-title">Художественная визуализация</h2>
+
+                <div class="service-price">1000 ₽/м²</div>
+
+                <div class="service-package">
+                    <h3 class="package-title">В пакет входят:</h3>
+                    <ul class="package-list">
+                        <li>до 10 PRO-моделей на проект. Также имеется своя база моделей. При сложном моделировании услуги моделлера оплачиваются отдельно.</li>
+                        <li>2 круга бесплатных правок.</li>
+                        <li>2-5 дней на помещение до первых черновых рендеров.</li>
+                    </ul>
+                </div>
+
+                <div class="service-discount">
+                    <p class="discount-text">
+                        <span class="discount-highlight">Скидка 10%</span> на первое сотрудничество
+                    </p>
+                </div>
+            </div>
+
+            <!-- Правая часть - галерея -->
+            <div class="service-gallery">
+                <div class="gallery-container">
+                    <!-- Слайды галереи -->
+                    <div class="gallery-slide active">
+                        <img src="image/01_MINSK/IMG_1955.JPG" alt="Пример работы 1" class="gallery-image">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="image/02_Headwood/IMG_1991.JPG" alt="Пример работы 2" class="gallery-image">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="image/02_Headwood/IMG_1981.JPG" alt="Пример работы 3" class="gallery-image">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="image/01_MINSK/IMG_1956.JPG" alt="Пример работы 4" class="gallery-image">
+                    </div>
+                    <div class="gallery-slide">
+                        <img src="image/04_APARTMOSKOW/IMG_9509.JPG" alt="Пример работы 5" class="gallery-image">
+                    </div>
+
+                    <!-- Навигационные точки -->
+                    <div class="gallery-nav">
+                        <div class="nav-dot active" data-slide="0"></div>
+                        <div class="nav-dot" data-slide="1"></div>
+                        <div class="nav-dot" data-slide="2"></div>
+                        <div class="nav-dot" data-slide="3"></div>
+                        <div class="nav-dot" data-slide="4"></div>
+                    </div>
+
+                    <!-- Счетчик -->
+                    <div class="gallery-counter">1/5</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Блок связи -->
+        <div class="contact-action">
+            <h3 class="contact-action-title">Заказать услугу или задать вопрос</h3>
+            <div class="contact-action-buttons">
+                <a href="https://t.me/sooooooonik" target="_blank" class="contact-action-button telegram">
+                    <i class="fab fa-telegram contact-action-icon"></i>
+                    <span>Написать в Telegram</span>
+                </a>
+            </div>
+            <p style="margin-top: 1.5rem; font-family: var(--font-stem); font-weight: 300; color: var(--text-color); opacity: 0.8;">
+                @sooooooonik
+            </p>
+        </div>
+    </main>
+
+    <!-- Футер -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Визуализатор Бедрик Софья</div>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript для галереи
+        document.addEventListener('DOMContentLoaded', function() {
+            // Элементы галереи
+            const slides = document.querySelectorAll('.gallery-slide');
+            const dots = document.querySelectorAll('.nav-dot');
+            const counter = document.querySelector('.gallery-counter');
+
+            let currentSlide = 0;
+            let slideInterval;
+            const totalSlides = slides.length;
+
+            // Функция показа слайда
+            function showSlide(index) {
+                // Скрываем все слайды
+                slides.forEach(slide => {
+                    slide.classList.remove('active', 'prev', 'next');
+                });
+
+                // Скрываем все точки
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                });
+
+                // Показываем текущий слайд
+                slides[index].classList.add('active');
+                dots[index].classList.add('active');
+
+                // Обновляем счетчик
+                counter.textContent = `${index + 1}/${totalSlides}`;
+
+                // Показываем предыдущий и следующий слайды для анимации
+                const prevIndex = (index - 1 + totalSlides) % totalSlides;
+                const nextIndex = (index + 1) % totalSlides;
+
+                slides[prevIndex].classList.add('prev');
+                slides[nextIndex].classList.add('next');
+
+                currentSlide = index;
+            }
+
+            // Функция следующего слайда
+            function nextSlide() {
+                const nextIndex = (currentSlide + 1) % totalSlides;
+                showSlide(nextIndex);
+            }
+
+            // Функция предыдущего слайда
+            function prevSlide() {
+                const prevIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+                showSlide(prevIndex);
+            }
+
+            // Автопереключение слайдов
+            function startSlideShow() {
+                slideInterval = setInterval(nextSlide, 4000);
+            }
+
+            function stopSlideShow() {
+                clearInterval(slideInterval);
+            }
+
+            // Инициализация галереи
+            showSlide(0);
+            startSlideShow();
+
+            // Обработчики для точек навигации
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    showSlide(index);
+                    stopSlideShow();
+                    startSlideShow();
+                });
+            });
+
+            // Останавливаем автопрокрутку при наведении на галерею
+            const gallery = document.querySelector('.service-gallery');
+            if (gallery) {
+                gallery.addEventListener('mouseenter', stopSlideShow);
+                gallery.addEventListener('mouseleave', startSlideShow);
+                gallery.addEventListener('touchstart', stopSlideShow);
+                gallery.addEventListener('touchend', () => setTimeout(startSlideShow, 3000));
+            }
+
+            // Навигация с клавиатуры
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                    stopSlideShow();
+                    startSlideShow();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                    stopSlideShow();
+                    startSlideShow();
+                }
+            });
+
+            // Анимация при скролле для хедера
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 50) {
+                    header.style.padding = '1rem 0';
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.padding = '1.5rem 0';
+                    header.style.boxShadow = 'none';
+                }
+            });
+
+            // Анимация навигации
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-3px)';
+                });
+
+                link.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
