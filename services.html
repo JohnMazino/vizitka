@@ -446,9 +446,9 @@
                 <img src="image/bd..png" class="logo-img">
             </a>
             <div class="nav-links">
-                <a href="index.html" data-page="home" class="nav-link">Главная</a>
-                <a href="portfolio.html" data-page="portfolio" class="nav-link">Портфолио</a>
-                <a href="#" data-page="services" class="nav-link active">Услуги</a>
+                <a href="index.html" data-page="home" class="nav-link">ГЛАВНАЯ</a>
+                <a href="portfolio.html" data-page="portfolio" class="nav-link">ПОРТФОЛИО</a>
+                <a href="services.html" data-page="services" class="nav-link active">УСЛУГИ</a>
             </div>
             <div class="hamburger">
                 <i class="fas fa-bars"></i>
@@ -544,7 +544,6 @@
         </div>
     </footer>
 
-    <!-- ПОДКЛЮЧЕНИЕ index.js - ЭТО ВАЖНО! -->
     <script src="index.js"></script>
 
     <script>
@@ -666,37 +665,6 @@
                     this.style.transform = 'translateY(0)';
                 });
             });
-
-            // Инициализация мобильного меню из index.js
-            const hamburger = document.querySelector('.hamburger');
-            const navLinks = document.querySelector('.nav-links');
-
-            if (hamburger && navLinks) {
-                hamburger.addEventListener('click', () => {
-                    const isDisplayed = navLinks.style.display === 'flex';
-                    navLinks.style.display = isDisplayed ? 'none' : 'flex';
-                    navLinks.style.position = 'absolute';
-                    navLinks.style.top = '100%';
-                    navLinks.style.left = '0';
-                    navLinks.style.right = '0';
-                    navLinks.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
-                    navLinks.style.backdropFilter = 'blur(10px)';
-                    navLinks.style.flexDirection = 'column';
-                    navLinks.style.padding = '2rem';
-                    navLinks.style.gap = '1.5rem';
-                    navLinks.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
-                    navLinks.style.zIndex = '1001';
-                });
-
-                // Закрытие меню при клике на ссылку
-                document.querySelectorAll('.nav-links a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (window.innerWidth <= 768) {
-                            navLinks.style.display = 'none';
-                        }
-                    });
-                });
-            }
         });
     </script>
 </body>
